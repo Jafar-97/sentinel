@@ -338,7 +338,7 @@ footer span{color:var(--teal)}
 <div class="toast" id="toast"></div>
 
 <script>
-var AKEY='',AUDIT=[],STATS={t:0,p:0,f:0,c:0};
+var AKEY='demo',AUDIT=[],STATS={t:0,p:0,f:0,c:0};
 
 var SUITES=[
   {id:'jailbreak',icon:'&#128275;',ic:'ic-r',title:'Jailbreak and Prompt Injection',sub:'instruction override / role confusion / adversarial injection',
@@ -432,11 +432,9 @@ function renderTest(t){
 function tog(id){document.getElementById('sw-'+id).classList.toggle('collapsed')}
 
 function connectKey(){
-  var v=document.getElementById('akey').value.trim();
-  if(!v.startsWith('sk-')){toast('API key must start with sk-');return}
-  AKEY=v;
+  AKEY='server';
   document.getElementById('nst').textContent='connected';
-  toast('API key connected');
+  toast('Ready');
 }
 
 async function callClaude(sys,usr,mt){
@@ -487,7 +485,7 @@ async function runTest(sid,t){
 }
 
 async function runSuite(sid){
-  if(!AKEY){toast('Connect your API key first');return}
+  
   var suite=SUITES.find(function(s){return s.id===sid});
   setSB(sid,'run','running');
   document.getElementById('sw-'+sid).classList.remove('collapsed');
@@ -508,7 +506,7 @@ async function runSuite(sid){
 }
 
 async function runAll(){
-  if(!AKEY){toast('Connect your API key first');return}
+  
   var btn=document.getElementById('rbtn'),txt=document.getElementById('rtxt'),ico=document.getElementById('ricon');
   btn.disabled=true;txt.textContent='Running...';ico.innerHTML='<span class="spin"></span>';
   var pw=document.getElementById('pw'),pf=document.getElementById('pf'),pp=document.getElementById('ppct'),pl=document.getElementById('plbl');
